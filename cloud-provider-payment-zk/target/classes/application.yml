@@ -1,0 +1,12 @@
+server:
+  port: 8004
+  servlet:
+    context-path: /cloud-provider-payment-zk
+spring:
+  application:
+    ## 这个名称很重要，服务的注册名称，定了以后就不要乱改了
+    name: cloud-provider-payment-zk
+  # zookeeper配置
+  cloud:
+    zookeeper:
+      connect-string: 192.168.0.122:2181
