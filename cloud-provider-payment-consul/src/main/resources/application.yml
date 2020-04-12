@@ -1,0 +1,17 @@
+server:
+  port: 8005
+  servlet:
+    context-path: /cloud-provider-payment-consul
+spring:
+  application:
+    ## 这个名称很重要，服务的注册名称，定了以后就不要乱改了
+    name: cloud-provider-payment-consul
+  cloud:
+    consul: #http://consulIp:8500/v1/agent/checks 排查问题
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        hostname: localhost
+        health-check-url: http://${spring.cloud.client.ip-address}:${server.port}/cloud-provider-payment-consul/actuator/health
+#        prefer-ip-address: true   # 当加上这个的时候，consul控制台中该服务的address的值变为ip地址

@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>cloud-provider-payment-zk</artifactId>
+    <artifactId>cloud-provider-payment-consul</artifactId>
 
     <dependencies>
         <!--公共包-->
@@ -17,11 +17,12 @@
             <artifactId>cloud-api-common</artifactId>
             <version>${cloud-api-common.version}</version>
         </dependency>
-        <!--引入zookeeper的服务发现-->
+        <!--引入consul包-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
