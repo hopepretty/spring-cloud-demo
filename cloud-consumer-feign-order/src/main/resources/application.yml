@@ -1,0 +1,18 @@
+server:
+  port: 82
+  servlet:
+    context-path: /cloud-consumer-feign-order
+spring:
+  application:
+    name: cloud-consumer-feign-order
+## eureka客户端配置
+eureka:
+  instance:
+    instance-id: cloud-consumer-feign-order-${server.port} # 自定义在注册中心的服务名称
+    prefer-ip-address: true   # 显示该服务的ip与端口
+  client:
+    register-with-eureka: true  #将自己注册上去
+    fetch-registry: true  # 是否从EurekaServer中抓取已有的注册信息，默认为ture，单节点无所谓，集群必须是false才能配置ribbon使用负载均衡
+    service-url:
+      defaultZone: http://localhost:7000/eureka  #单机eureka
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka #集群

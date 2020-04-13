@@ -66,10 +66,10 @@ public class PaymentController {
 
         if (payment != null) {
             jsonResult.setData(payment);
-            jsonResult.setMessage("查询成功");
+            jsonResult.setMessage("查询成功 端口为：" + serverPort);
         } else {
             jsonResult.setSuccess(false);
-            jsonResult.setMessage("查询失败");
+            jsonResult.setMessage("查询失败 端口为：" + serverPort);
         }
         return jsonResult;
     }
@@ -88,5 +88,15 @@ public class PaymentController {
         System.out.println(instances);
         return instances;
     }
+
+    /**
+     * 自定义负载均衡测试
+     * @return
+     */
+    @GetMapping("lb")
+    public String lb() {
+        return serverPort;
+    }
+
 
 }

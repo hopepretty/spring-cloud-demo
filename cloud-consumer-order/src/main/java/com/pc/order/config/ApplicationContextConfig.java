@@ -1,6 +1,5 @@
 package com.pc.order.config;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +18,7 @@ public class ApplicationContextConfig {
      * 使用 Ribbon进行负载均衡的,不需要关心服务的ip与端口
      * @return
      */
-    @LoadBalanced
+//    @LoadBalanced   使用自定义负载均衡策略
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
