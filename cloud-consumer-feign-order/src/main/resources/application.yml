@@ -16,3 +16,13 @@ eureka:
     service-url:
       defaultZone: http://localhost:7000/eureka  #单机eureka
 #      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka #集群
+#设置feign客户端超时时间（openFeign默认支持ribbon）
+ribbon:
+  # 建立连接后读取到资源所用到的时间
+  ReadTimeout: 5000
+  # 指定建立连接的时间
+  ConnectTimeout: 5000
+logging:
+  level:
+    # feign已什么级别监听该接口
+    com.pc.order.service.PaymentFeignService: debug

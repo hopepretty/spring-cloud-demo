@@ -1,0 +1,15 @@
+server:
+  port: 8100
+  servlet:
+    context-path: /cloud-provider-hystrix-payment
+spring:
+  application:
+    ## 这个名称很重要，服务的注册名称，定了以后就不要乱改了
+    name: cloud-provider-hystrix-payment
+## eureka客户端配置
+eureka:
+  client:
+    register-with-eureka: true  #将自己注册上去
+    fetch-registry: true  # 是否从EurekaServer中抓取已有的注册信息，默认为ture，单节点无所谓，集群必须是false才能配置ribbon使用负载均衡
+    service-url:
+      defaultZone: http://localhost:7000/eureka  #单机eureka

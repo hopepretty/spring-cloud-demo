@@ -29,4 +29,10 @@ public class OrderFeignController {
         return jsonResult;
     }
 
+    @GetMapping("feign/timeout")
+    public String FeignTimeout() {
+        String str = paymentFeignService.feignTimeout();
+        return str;
+    }
+
 }

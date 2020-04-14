@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author pc
@@ -96,6 +97,16 @@ public class PaymentController {
     @GetMapping("lb")
     public String lb() {
         return serverPort;
+    }
+
+    /**
+     * feign超时测试
+     * @return
+     */
+    @GetMapping("feign/timeout")
+    public String feignTimeout() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        return "测试成功";
     }
 
 

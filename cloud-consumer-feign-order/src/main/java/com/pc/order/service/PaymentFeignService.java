@@ -22,4 +22,11 @@ public interface PaymentFeignService {
     @GetMapping("payment/getPaymentById/{id}")
     public JsonResult<Payment> getPaymentById(@PathVariable("id") Long id);
 
+    /**
+     * feign超时测试
+     * @return
+     */
+    @GetMapping("payment/feign/timeout")
+    public String feignTimeout();
+
 }
