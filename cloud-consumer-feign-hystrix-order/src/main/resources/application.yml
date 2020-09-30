@@ -15,3 +15,6 @@ eureka:
 ribbon:
   readTimeout: 1
   connectTimeout: 1
+feign:
+  hystrix:
+    enabled: true  # 开启hystrix,用于服务降级在注解@FeignClient中添加fallbackFactory属性值

@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-consumer-order</artifactId>
+    <artifactId>cloud-hystrix-dashboard</artifactId>
+
 
     <dependencies>
         <dependency>
@@ -17,16 +18,10 @@
             <artifactId>cloud-api-common</artifactId>
             <version>${cloud-api-common.version}</version>
         </dependency>
-        <!--引入eureka客户端包 注意啦，是starter的包-->
+        <!--hystrix的图形化页面-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-        <!--zipkin链路追踪-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
         </dependency>
     </dependencies>
-
 </project>

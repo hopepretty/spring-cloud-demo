@@ -102,4 +102,14 @@ public class OrderController {
                 eurekaServiceInstance.getInstanceInfo().getVIPAddress() + "/payment/lb", String.class);
     }
 
+    /**
+     * zipkin链路调用测试
+     * @return
+     */
+    @RequestMapping("zipkin")
+    public String paymentZipkin() {
+        String forObject = restTemplate.getForObject( "http://localhost:8002 /cloud-provider-payment/payment/zipkin", String.class);
+        return forObject;
+    }
+
 }

@@ -57,12 +57,14 @@ public class PaymentController {
      * @param id
      * @return
      */
-    @GetMapping("getPaymentById/{id}")
+    @GetMapping("get/{id}")
     public JsonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         System.out.println("当前服务端口为：" + serverPort);
         JsonResult<Payment> jsonResult = new JsonResult<Payment>();
 
-        Payment payment = paymentService.getPaymentById(id);
+//        Payment payment = paymentService.getPaymentById(id);
+        Payment payment = new Payment();
+        payment.setId(id);
         log.info("查询结果：" + payment);
 
         if (payment != null) {
@@ -107,6 +109,15 @@ public class PaymentController {
     public String feignTimeout() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
         return "测试成功";
+    }
+
+    /**
+     * 链路调用配置
+     * @return
+     */
+    @RequestMapping("zipkin")
+    public String paymentZipkin() {
+        return "服务链路调用成功";
     }
 
 

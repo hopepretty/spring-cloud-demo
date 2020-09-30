@@ -16,7 +16,7 @@
     <module>cloud-api-common</module>
     <module>cloud-provider-payment</module>
     <module>cloud-consumer-order</module>
-    <module>cloud-eureka-server-single</module>
+    <module>cloud-eureka-server</module>
     <module>cloud-eureka-server-cluster01</module>
     <module>cloud-eureka-server-cluster02</module>
       <module>cloud-provider-payment-zk</module>
@@ -26,6 +26,8 @@
       <module>cloud-consumer-feign-order</module>
       <module>cloud-provider-hystrix-payment</module>
       <module>cloud-consumer-feign-hystrix-order</module>
+    <module>cloud-hystrix-dashboard</module>
+      <module>cloud-api-gateway</module>
   </modules>
 
   <!--统一管理jar包版本-->
@@ -78,7 +80,7 @@
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>5.1.38</version>
+        <version>8.0.15</version>
       </dependency>
       <!--druid依赖-->
       <dependency>

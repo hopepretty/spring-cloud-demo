@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * feign接口
+ * value属性通过注册中心的服务名进行查找相应服务地址进行调用
+ * path表示服务提供者的地址，直接进行调用
  */
 @Component
 @FeignClient(value = "CLOUD-PROVIDER-PAYMENT", path = "cloud-provider-payment")
