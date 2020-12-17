@@ -1,7 +1,7 @@
 server:
   port: 8002
-  servlet:
-    context-path: /cloud-provider-payment
+#  servlet:
+#    context-path: /cloud-provider-payment
 
 spring:
   application:
@@ -29,7 +29,7 @@ mybatis:
 ## eureka客户端配置
 eureka:
   instance:
-    instance-id: cloud-provider-payment-${server.port}
+    instance-id: cloud-provider-payment
     prefer-ip-address: true
     # 客户端向服务端发送心跳的时间间隔  默认30s
     lease-renewal-interval-in-seconds: 1

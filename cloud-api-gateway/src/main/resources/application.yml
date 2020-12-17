@@ -4,21 +4,26 @@ server:
 spring:
   application:
     name: cloud-gateway
+#  redis:  # 网关限流用到
+#    host: localhost
+#    port: 6379
   cloud:
     gateway:
+      ##  第二种配置路由方式
       discovery:
         locator:
-          enabled: true  # 开启从注册中心动态创建路由的功能，利用微服务名进行路由
+          enabled: true  # 通过 serviceId 转发到具体的服务实例。默认为 false，
+                         # 设为 true 便开启通过服务中心的自动根据 serviceId 创建路由的功能。
       routes:
         ###第一种配置路由方式
         - id: payment_routh                 #路由的ID，没有固定规则但要求唯一，建议配合服务名
 #          uri: http://localhost:8001        #匹配成功后提供服务的路由地址
-          uri: lb://cloud-provider-payment  ##通过注册中心所对应的服务名拿取相应服务路径
+          uri: lb://cloud-provider-payment2  ##通过注册中心所对应的服务名拿取相应服务路径
           predicates:
             - Path=/payment/get/**          #断言，路径相匹配的进行路由 即http://localhost:9527/payment/get/** ->  http://localhost:8001/payment/get/**
         - id: payment_routh2
 #          uri: http://localhost:8001
-          uri: lb://cloud-provider-payment
+          uri: lb://cloud-provider-payment1
           predicates:   ## 进行路由匹配并且进行层层断言
             - Path=/payment/lb/**
 #            - After=
@@ -26,6 +31,18 @@ spring:
             - Header=X-request-Id, \d+  ## X-request-Id值必须含有整数值 curl http://localhost:9527/payment/lb --cookie "username=pc" -H "X-request-Id:1"
             - Method=GET
             - Query=username,\d+  ## 参数需要携带username，并且值为整数
+          filters:
+            - AddRequestParameter=foo, bar  # 给匹配的每个请求添加上foo=bar的参数和值。
+            - StripPrefix=2  # 当请求路径匹配到/name/**会将包含name和后边的字符串接去掉转发， StripPrefix=2就代表截取路径的个数，
+                             # 这样配置后当请求/name/bar/foo后端匹配到的请求路径就会变成http://nameservice/foo
+            - PrefixPath=/mypath  #和 StripPrefix 正相反，是在 URL 路径前面添加一部分的前缀
+#            - name: RequestRateLimiter  # 限流
+#              args:
+#                redis-rate-limiter.replenishRate: 10  # 允许用户每秒处理多少个请求
+#                redis-rate-limiter.burstCapacity: 20  # 令牌桶的容量，允许在一秒钟内完成的最大请求数
+#                key-resolver: "#{@userKeyResolver}"  # 使用 SpEL 按名称引用 bean
+            - Hystrix=myCommandName  # 熔断 利用 Hystrix 的熔断特性，在流量过大时进行服务降级
+
 
 eureka:
   client:
@@ -35,3 +52,7 @@ eureka:
       defaultZone: http://localhost:7000/eureka  #单机eureka
   instance:
     hostname: cloud-gateway-service
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
